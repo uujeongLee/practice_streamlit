@@ -29,7 +29,7 @@ type_emoji_dict = {
     "페어리": "🧚"
 }
 
-pokemons = [
+initial_pokemons = [
     {
         "name": "피카츄",
         "types": ["전기"],
@@ -62,8 +62,36 @@ pokemons = [
     },
 ]
 
-for i in range(0, len(pokemons), 3):
-    row_pokemons = pokemons[i:i+3]
+if "pokemons" not in st.session_state:
+    st.session_state.pokemons = initial_pokemons
+
+with st.form(key="form"):
+    col1, col2 = st.columns(2)
+    with col1:
+        name = st.text_input(label="포켓몬 이름")
+    with col2:
+        types = st.multiselect(
+            label="포켓몬 속성",
+            options=list(type_emoji_dict.keys()),
+            max_selections=2,
+        )
+    image_url = st.text_input(label="포켓몬 이미지 URL")
+    submit = st.form_submit_button(label="Submit")
+    if submit:
+        if not name:
+            st.error("포켓몬의 이름을 입력해주세요.")
+        elif len(types) == 0:
+            st.error("포켓몬의 속성을 적어도 한개 선택해주세요.")
+        else:
+            st.success("포켓몬을 추가할 수 있습니다.")
+            st.session_state.pokemons.append({
+                "name": name,
+                "types": types,
+                "image_url": image_url if image_url else "./images/default.png"
+            })
+
+for i in range(0, len(st.session_state.pokemons), 3):
+    row_pokemons = st.session_state.pokemons[i:i+3]
     cols = st.columns(3)
     for j in range(len(row_pokemons)):
         with cols[j]:
