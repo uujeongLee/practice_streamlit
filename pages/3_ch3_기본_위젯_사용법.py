@@ -32,7 +32,7 @@ type_emoji_dict = {
 pokemon = {
     "name": "누오",
     "types": ["물", "땅"],
-    "image_url": "https://i.namu.wiki/i/0KC24R7hvHoRQFaki5E9aJJc4h4NGh0szPAL9G7XDNPc6RiIdf7qCGfJkjrv3usF-ci2LLqQgxiFr1n7WTcbfYFKpWDnSyeVI8uUDBWwZ7-0V8hkd0VTPcms-NKxQXR3FEjJfQD8aJ40UW48XI8Qig.webp"
+    "image_url": "https://storage.googleapis.com/firstpenguine-coding-school/pokemons/nuo.webp"
 }
 with st.expander(label=f"{pokemon['name']}", expanded=True):
     st.image(pokemon["image_url"])
